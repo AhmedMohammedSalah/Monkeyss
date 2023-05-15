@@ -1,0 +1,234 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+* {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+:root {
+  --main-color: #0462ad;
+  --sub-color: #0389c2;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  min-height: 100vh;
+  font-family: "Roboto", sans-serif;
+}
+ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+/* fixed */
+.container {
+  padding: 20px 80px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.main-heading {
+  font-size: 20px;
+  font-weight: 600;
+}
+/* fixed */
+/* Start Sign-up */ 
+ .sign-up nav {
+    padding-top: 40px;
+    position: relative;
+  }
+  .sign-up nav a img {
+    width: 70px;
+    margin-left: 100px;
+  }
+  .sign-up nav i {
+    position: absolute;
+    left: 78px;
+    top: 67px;
+    color: var(--sub-color);
+    cursor: pointer;
+  }
+  .sign-up nav p {
+    position: absolute;
+    left: 115px;
+    bottom: -15px;
+    font-weight: 500;
+    color: var(--sub-color);
+    cursor: pointer;
+
+  /* End Sign-up */
+  
+
+/* 
+  .sign-up nav {
+    padding-top: 40px;
+    position: relative;
+  }
+  .sign-up nav a img {
+    width: 70px;
+    margin-left: 100px;
+  }
+  .sign-up nav i {
+    position: absolute;
+    left: 78px;
+    top: 67px;
+    color: var(--sub-color);
+    cursor: pointer;
+  }
+  .sign-up nav p {
+    position: absolute;
+    left: 115px;
+    bottom: -15px;
+    font-weight: 500;
+    color: var(--sub-color);
+    cursor: pointer;
+  }
+  .sign-up .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 45px 0 0 60px;
+  }
+  .sign-up .container .col-3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .sign-up .container .col-3 img {
+    width: 350px;
+  }
+  .sign-up .log-text {
+    color: var(--sub-color);
+    padding: 45px 0 10px 70px;
+  }
+  .sign-up .container .cols label {
+    color: black;
+    font-weight: 400;
+    margin-bottom: 15px;
+    padding-left: 10px;
+    padding-top: 20px;
+  }
+  .sign-up .container .cols .age {
+    padding-left: 0;
+    margin-left: -10px;
+  }
+  .sign-up .container .cols input {
+    position: relative;
+    border-radius: 10px;
+    border: none;
+    outline: 0;
+    padding: 0 35px 0 35px;
+    width: 90%;
+    height: 50px;
+    font-size: 17px;
+    margin-bottom: 40px;
+    background-color: #f3f4f8;
+  }
+  .sign-up .container .cols input::placeholder {
+    font-weight: 500;
+    font-size: 15px;
+    opacity: 0.4;
+  }
+  .sign-up .container .cols i {
+    position: relative;
+    left: -88%;
+    z-index: 1;
+    top: 2px;
+    color: #9498ae;
+  }
+  .sign-up .container .cols .hide-icon {
+    position: relative;
+    z-index: 1;
+    left: 82%;
+    top: -73px;
+  }
+  .sign-up .container .radios {
+    position: relative;
+    display: flex;
+    align-items: center;
+    top: -185px;
+  }
+  .sign-up .container .radios div {
+    padding-left: 15px;
+  }
+  .sign-up .container .upload {
+    margin-top: 40px;
+    position: relative;
+    padding-left: 15px;
+    margin-left: -17px;
+  }
+  .sign-up .container .up-label {
+    position: relative;
+    top: 40px;
+    right: 20px;
+  }
+  .sign-up .container .col-1 .up-link {
+    position: relative;
+    z-index: 1;
+    left: -9%;
+    top: 6px;
+    font-size: 20px;
+  }
+  .sign-up .register-field .register {
+    all: unset;
+    cursor: pointer;
+    color: white;
+    background-color: var(--main-color);
+    position: relative;
+    border-radius: 10px;
+    padding: 0 18px 0 18px;
+    width: 45%;
+    height: 45px;
+    font-size: 17px;
+    font-weight: 600;
+    text-align: center;
+    transition: 0.5s;
+    margin-bottom: 15px;
+    margin-left: 10%;
+  }
+  .sign-up .last-p{
+    padding-bottom: 25px;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 13px;
+    left: -15%;
+    position: relative;
+  }
+  .sign-up .last-p span:hover {
+    font-weight: 600;
+    color: var(--sub-color);
+    cursor: pointer;
+  }
+  @media (max-width: 760px) {
+    .sign-up .container .col-3 img {
+      display: none;
+    }
+    .sign-up .container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      padding: 45px 0 0 45px;
+    }
+    .sign-up .register-field{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-left: -18px; 
+    }
+    .sign-up .last-p{
+      margin-left: 115px;
+    }
+    .sign-up .register-field .register {
+    }
+    .sign-up .container .radios {
+      top: -585px;
+    }
+  }
+  @media (max-width: 1014px) {
+    .sign-up .container .col-3 img {
+      display: none;
+    }
+  } 
+*/

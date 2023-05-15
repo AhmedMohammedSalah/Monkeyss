@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <title>Minia</title>
+</head>
+
+<body>
+    <div class="user-home">
+        <div id="nav-holder">
+            <div id="flex-nav">
+                <a href="#" class="logo">
+                    <img src="{% static 'imgs/logo.png' %}" alt="Logo">
+                </a>
+                <nav>
+                    <i class="ri-menu-3-line"></i>
+                    <ul>
+                        <li><a class="active" href="{% url 'accounts:login_home' %}">Home</a></li>
+                        <li><a href="{% url 'diagonsis:upload_test' %}">Diagnoise</a></li>
+                        <li><a href="{% url 'accounts:profile' request.user.slug%}">Profile</a></li>
+                    </ul>
+                    <h3>Hello, {{request.user.first_name}}</h3>
+                    <div class="log-out">
+                        <a href="{% url 'logout' %}"><input type="submit" value="Logout" class="logout"/></a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div class="doctor-home">
+            <div class="lt-s">
+                <img src="{% static 'imgs/p7.png' %}" alt="">
+            </div>
+            <div class="rt-s">
+                <p id="first pargraph">Precautions to avoid getting sick <br> Reduce your risk of catching monkeypox
+                    from
+                    other people by limiting close contact <br> with people who have affected monkeypox. <br> Clean your
+                    hands
+                    frequently with soap and water or an alcohol. <br><br> Frequently clean and disinfect
+                    commonly touched surfaces in the environments that could have been contaminated with the virus from someone who
+                    is infectious. <br><br>
+                </p>
+                <p id="second-paragraph">
+                    Egypt’s ministry of health announced, Monday recording first positive infection of Monkeypox virus
+                    for an Egyption citizen. Patient was isolated in the hospital according to the ministry.
+                </p>
+                <div class="rm">
+                    <input type="submit" value="Read More" id="rm">
+                </div>
+            </div>
+
+        </div>
+        </div>
+</body>
+
+</html>

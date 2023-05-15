@@ -1,0 +1,84 @@
+
+{% load static %}
+
+{% load bootstrap4 %}
+{% load crispy_forms_tags %}
+{% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+  {% endif %}
+
+  {% if next %}
+    {% if user.is_authenticated %}
+      <p>Your account doesn't have access to this page. To proceed,
+      please login with an account that has access.</p>
+    {% else %}
+      <p>Please login to see this page.</p>
+    {% endif %}
+  {% endif %}
+  
+  <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <title>Minia</title>
+</head>
+
+<body>
+    <div class="login">
+        <nav>
+            <i class="ri-arrow-left-line"></i>
+            <a href="#">
+                <img src="{% static 'imgs/logo.png' %}" alt="Logo">
+            </a>
+            <p>MPXV</p>
+        </nav>
+        <form method="post">
+            {% csrf_token %}
+        <div class="container">
+            <div class="log-text">
+                <h1>Login</h1>
+            </div>
+            <div class="container-2">
+                <div class="l-log">
+                    <label for="e-address">Email Address</label>
+                    <div class="input-field">
+                        {{form.username|as_crispy_field }}
+                        {% comment %} <input type="email" id="e-address" placeholder="Email Address" required> {% endcomment %}
+                        <i class="ri-user-line email-icon"></i>
+                    </div>
+                    <label for="password">Password</label>
+                    <div class="input-field">
+                      {{form.password|as_crispy_field }}
+                        
+                      {% comment %} <input type="password" id="password" placeholder="Password" required> {% endcomment %}
+                        {% comment %} <i class="ri-lock-2-line pass-icon"></i>
+                        <a href="#" class="forget">Forget Password?</a> {% endcomment %}
+                    </div>
+
+                    <i class="ri-eye-off-fill hide-icon"></i>
+
+                    <div class="input-field">
+                        <input type="submit" value="Login" class="input-login">
+                    </div>
+                </form>
+                    <p class="reg"><a href="{% url 'accounts:signup' %}"><span>Create Account</span></a></p>
+                </div>
+                <div class="r-log">
+                    <img src="{% static 'imgs/WhatsApp Image .png' %}" alt="LOGO">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

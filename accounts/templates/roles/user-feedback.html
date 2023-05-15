@@ -1,0 +1,29 @@
+{% extends 'roles/user_settings.html' %}
+
+{% load bootstrap4 %}
+{% load crispy_forms_tags %}
+{% block content %}
+        
+<div class="content">
+    <div class="head">
+        <div class="left-h">
+        </div>
+    </div>
+    <div class="user-feedback-grid">
+        <form method="post">
+            {% csrf_token %}
+            {{form.rate1|as_crispy_field }}
+            {{form.rate2|as_crispy_field }}
+            {{form.rate3|as_crispy_field }}
+            {{form.rate4|as_crispy_field }}
+            {{form.rate5|as_crispy_field }}
+            <div class="user-submit">
+                <input type="submit" value="submit">
+            </div>
+        </form>
+    </div>
+
+    </div>
+</div>
+
+{% endblock content %}
