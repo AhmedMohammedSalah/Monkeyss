@@ -1,0 +1,71 @@
+{% extends 'roles/dashboard.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+        <h1 id="new-admin">Add new admin</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="add-admin-grid">
+                <div class="left-side">
+                    <label for="id" class="id-l">User Name</label>
+                    <div class="input-1">
+                        <i class="ri-user-line"></i>
+                        {{form.username|as_crispy_field }}
+                        
+                        {% comment %} <input type="text" class="id" placeholder="ID"> {% endcomment %}
+                    </div>
+                    <label for="" class="first-l">First Name</label>
+                    <div class="input-2">
+                        <i class="ri-user-line"></i>
+                        {{form.first_name|as_crispy_field }}
+                        
+                        {% comment %} <input type="text" class="first" placeholder="First Name"> {% endcomment %}
+                    </div>
+                    <label for="" class="email-l">Email Address</label>
+                    <div class="input-3">
+                        <i class="ri-mail-line"></i>
+                    {{form.email|as_crispy_field }}
+                        
+                        {% comment %} <input type="email" class="email" placeholder="Email Address"> {% endcomment %}
+                    </div>
+                </div>
+                <div class="right-side">
+                    <div></div>
+                    <label for="" class="last-l">Last Name</label>
+                    <div class="input-4">
+                        <i class="ri-user-line"></i>
+                        {{form.last_name|as_crispy_field }}
+                    
+                        {% comment %} <input type="text" class="last" placeholder="Last Name"> {% endcomment %}
+                    </div>
+                    <label for="" class="address-l">Phone</label>
+                    <div class="input-5">
+                        <i class="ri-smartphone-line"></i>
+                        {{form.phone|as_crispy_field }}
+                        
+                        {% comment %} <input type="text" class="address" placeholder="Address"> {% endcomment %}
+                    </div>
+                    <div class="input-5">
+                        {{form.password1|as_crispy_field }}
+                        
+                        {% comment %} <input type="text" class="address" placeholder="Address"> {% endcomment %}
+                    </div>
+                    <div class="input-5">
+                        {{form.password2|as_crispy_field }}
+                        
+                        {% comment %} <input type="text" class="address" placeholder="Address"> {% endcomment %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="create-acc">
+                <input type="submit" value="Create Account">
+            </div>
+
+        </form>
+        
+
+{% endblock content %}
+

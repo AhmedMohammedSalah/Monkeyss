@@ -1,0 +1,36 @@
+
+{% extends 'roles/dashboard.html' %}
+
+{% block content %}
+    <p class="analytics">Analytics</p>
+    <div class="wrapper">
+        <div class="card">
+            <h3>Total Cusomers</h3>
+            <div class="sub-card">
+                <p>{{users}}</p>
+                <i class="fa-solid fa-arrows-rotate"></i>
+            </div>
+        </div>
+        <div class="card">
+            <h3>Total Doctors</h3>
+            <div class="sub-card">
+                <p>{{doctors}}</p>
+                <i class="fa-solid fa-arrows-rotate"></i>
+            </div>
+        </div>
+        <div class="card">
+            <h3>Positive diagnosis</h3>
+            <div class="sub-card">
+                <p>{{tests}}</p>
+                <i class="fa-solid fa-arrows-rotate"></i>
+            </div>
+        </div>
+        <div class="card">
+            <h3>Negative Diagnosis</h3>
+            <div class="sub-card">
+                <p>{{tests}}</p>
+                <i class="fa-solid fa-arrows-rotate"></i>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -2,13 +2,15 @@ from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import authenticate, login as auth_login
-from django.views.generic import CreateView,UpdateView
-from .forms import CustomUserCreationForm,EmailAuthenticationForm
+from django.views.generic import CreateView,UpdateView,ListView
+from .forms import CustomUserCreationForm,EmailAuthenticationForm,AdminCreationForm
 from .models import CustomUser
-from django.contrib.auth.decorators import login_required# Create your views here.
-
+from django.contrib.auth.decorators import login_required, user_passes_test# Create your views here.
+from diagonsis.models import MedicalTest
 
 class CustomUserSignUpView(CreateView):
     form_class = CustomUserCreationForm
@@ -16,13 +18,18 @@ class CustomUserSignUpView(CreateView):
     template_name = "registration/signup.html"
     def get_form(self, form_class=None):
         form = super().get_form(form_class) 
-        form.fields['first_name'].widget.attrs['class'] = "input"
+        form.fields['first_name'].widget.attrs['class'] = "first"
         form.fields['first_name'].label = ""
         form.fields['first_name'].help_text = ""         
-        form.fields['last_name'].widget.attrs['class'] = "input"
+        form.fields['last_name'].widget.attrs['class'] = "last"
         form.fields['last_name'].label = ""
-        form.fields['last_name'].help_text = "" 
-        form.fields['email'].widget.attrs['class'] = "input"
+        form.fields['last_name'].help_text = ""       
+           
+        form.fields['phone'].widget.attrs['class'] = ""
+        form.fields['phone'].label = ""
+        form.fields['phone'].help_text = "" 
+        
+        form.fields['email'].widget.attrs['class'] = "email"
         form.fields['email'].label = ""
         form.fields['email'].help_text = "" 
         
@@ -82,22 +89,44 @@ def home(request):
         return render(request, 'roles/userhome.html', context)
     elif request.user.is_admmin:
         context = {}
-        return render(request, 'roles/dashboard-overview.html', context)
+        return render(request, 'roles/dashboard.html', context)
     elif request.user.is_doctor:
         context = {}
         return render(request, 'roles/doctorhome.html', context)
     else:
         return redirect(reverse('login'))
+@login_required
+@user_passes_test(lambda u: u.is_admmin, login_url='accounts:login')
+def overview(request):
+    users = CustomUser.objects.all()
+    usr=0
+    doc=0
+    for user in users:
+        if user.is_user:
+            usr+=1
+        elif user.is_doctor:
+            doc+=1
+    
+    tests=MedicalTest.objects.count()
+            
+    context={'users': usr,'doctors':doc,'tests':tests}
+    return render(request, 'roles/dashboard_overview.html', context)
 
 
 
-
-class CustomeUserUpdateView(UpdateView):
+class CustomeUserUpdateView(LoginRequiredMixin,UpdateView):
     model = CustomUser
     template_name = "roles/user_settings.html"
-    fields = ['first_name', 'last_name', 'email','age','address']
+    fields = ['first_name', 'last_name', 'email','age','address','phone']
     def get_success_url(self):
         return reverse('accounts:profile', kwargs={'slug': self.request.user.slug})
+    
+class AdminUpdateView(LoginRequiredMixin,UpdateView):
+    model = CustomUser
+    template_name = "roles/acc-settings.html"
+    fields = ['first_name', 'last_name', 'email','age','address','phone']
+    def get_success_url(self):
+        return reverse('accounts:overview')
 class RateUpdateView(UpdateView):
     model = CustomUser
     template_name = "roles/user-feedback.html"
@@ -137,7 +166,90 @@ class CustomChangePasswordForm(PasswordChangeForm):
         self.fields['new_password2'].help_text = ''
 
 class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
+    
     template_name = 'roles/change_password.html'
     success_url = reverse_lazy('accounts:profile') 
     success_message = "Your password has been changed successfully."
     form_class = CustomChangePasswordForm
+    
+from django.contrib.auth.mixins import UserPassesTestMixin
+
+class AdminsView(LoginRequiredMixin,UserPassesTestMixin, ListView):
+    model = CustomUser
+    template_name = 'roles/dachboard-admins.html'
+    context_object_name = 'admins'
+
+    def test_func(self):
+        return self.request.user.is_authenticated and self.request.user.is_admmin
+    
+    def get_queryset(self):
+        return CustomUser.objects.filter(is_admmin=True)
+
+class UsersView(LoginRequiredMixin,UserPassesTestMixin, ListView):
+    model = CustomUser
+    template_name = 'roles/dashboard-users.html'
+    context_object_name = 'users'
+
+    def test_func(self):
+        return self.request.user.is_authenticated and self.request.user.is_admmin
+    
+    def get_queryset(self):
+        return CustomUser.objects.filter(is_user=True)   
+
+class DoctorsView(LoginRequiredMixin,UserPassesTestMixin, ListView):
+    model = CustomUser
+    template_name = 'roles/dashboard-doctors.html'
+    context_object_name = 'doctors'
+
+    def test_func(self):
+        return self.request.user.is_authenticated and self.request.user.is_admmin
+    
+    def get_queryset(self):
+        return CustomUser.objects.filter(is_doctor=True)
+    
+    
+class AddAdminCreateView(LoginRequiredMixin,UserPassesTestMixin,CreateView):    
+    form_class = AdminCreationForm
+    template_name = "roles/add-admin-dashboard.html"
+    success_url = reverse_lazy("accounts:admins")
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class) 
+        form.fields['first_name'].widget.attrs['class'] = "input"
+        form.fields['first_name'].label = ""
+        form.fields['first_name'].help_text = ""         
+        form.fields['last_name'].widget.attrs['class'] = "input"
+        form.fields['last_name'].label = ""
+        form.fields['last_name'].help_text = "" 
+        
+        
+
+        
+        form.fields['email'].widget.attrs['class'] = "input"
+        form.fields['email'].label = ""
+        form.fields['email'].help_text = "" 
+        
+        form.fields['username'].widget.attrs['class'] = "last"
+        form.fields['username'].label = ""
+        form.fields['username'].help_text = ""       
+           
+        form.fields['phone'].widget.attrs['class'] = "input"
+        form.fields['phone'].label = ""
+        form.fields['phone'].help_text = "" 
+        
+        form.fields['password1'].widget.attrs['class'] = "input"
+        form.fields['password1'].label = "password"
+        form.fields['password1'].help_text = "" 
+        
+        
+        form.fields['password2'].widget.attrs['class'] = "input"
+        form.fields['password2'].label = "confirm password"
+        form.fields['password2'].help_text = "" 
+        
+        return form
+    def test_func(self):
+        return self.request.user.is_authenticated and self.request.user.is_admmin
+    def form_valid(self, form):
+        user = form.save()
+        user.is_admmin = True
+        user.save()
+        return super().form_valid(form)

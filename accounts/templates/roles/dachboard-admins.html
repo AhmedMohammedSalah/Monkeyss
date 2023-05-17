@@ -1,0 +1,37 @@
+{% extends 'roles/dashboard.html' %}
+
+{% block content %}
+      <table class="admins-table">
+        <thead>
+          <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Address</td>
+            <td>Phone</td>
+            <td>Age</td>
+            <td>Email</td>
+          </tr>
+        </thead>
+        <tbody>
+          
+          {% for admin in admins  %}
+              <tr>
+                <td>{{admin.id}}</td>
+                <td>{{admin.first_name }} {{admin.last_name }}</td>
+                <td>{{admin.address }}</td>
+                <td>{{admin.phone }}</td>
+                <td>{{admin.age }}</td>
+                <td>{{admin.email }}</td>
+              </tr>
+          {% endfor %}
+            
+          
+          
+        </tbody>
+      </table>
+      {% comment %} <div class="b-n">
+        <div class="bef">Before</div>
+        <div class="nums">Page 1 from 10</div>
+        <div class="next">Next</div>
+      </div> {% endcomment %}
+{% endblock content %}

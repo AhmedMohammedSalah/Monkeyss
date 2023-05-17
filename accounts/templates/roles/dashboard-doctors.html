@@ -1,0 +1,33 @@
+{% extends 'roles/dashboard.html' %}
+
+{% block content %}
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Address</td>
+            <td>Phone</td>
+            <td>Age</td>
+            <td>Email</td>
+            <td>Certificate</td>
+
+          </tr>
+        </thead>
+        <tbody>
+          {% for doctor in doctors %}
+            <tr>
+              <td>{{doctor.id}}</td>
+              <td>{{doctor.first_name}} {{doctor.last_name}}</td>
+              <td>{{doctor.address}}</td>
+              <td>{{doctor.phone}}</td>
+              <td>{{doctor.age}}</td>
+              <td>{{doctor.email}}</td>
+              <td><a href="/media/{{doctor.image}}"target="_blank"><i class="fa-sharp fa-solid fa-file-pdf"></a></i></td>
+            </tr>
+          {% endfor %}
+          
+        </tbody>
+      </table>
+{% endblock content %}
+

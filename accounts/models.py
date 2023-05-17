@@ -23,6 +23,7 @@ class CustomUser(AbstractUser):
     age = models.PositiveIntegerField(null=True, blank=True)
     slug = models.SlugField(blank=True, null=True)
     address =models.CharField(max_length=50, blank=True, null=True)
+    phone = models.CharField(max_length=11, null=True, blank=True)
     rate1=models.BooleanField(default=False)
     rate2=models.BooleanField(default=False)
     rate3=models.BooleanField(default=False)
