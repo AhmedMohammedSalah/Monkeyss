@@ -81,12 +81,11 @@
             {% block content %}
 
             <div class="profile-img">
-                <img src="{% static 'imgs/p7.png' %}" alt="">
+                <img src="/media/{{request.user.image}}" alt="">
             </div>
                 <div class="user-settings-grid">
                     <div class="left-side">
                         
-                    <img src="/media/{{request.user.image}}" alt="certificate">
                     </div>
                     
                     {% if request.user.verify_image %}
