@@ -11,6 +11,8 @@
             <td>Age</td>
             <td>Email</td>
             <td>Certificate</td>
+            <td>Verify docor</td>
+            <td>Submit</td>
 
           </tr>
         </thead>
@@ -24,6 +26,22 @@
               <td>{{doctor.age}}</td>
               <td>{{doctor.email}}</td>
               <td><a href="/media/{{doctor.image}}"target="_blank"><i class="fa-sharp fa-solid fa-file-pdf"></a></i></td>
+              
+              {% if doctor.verify_image %}
+                
+              <td>Doctor is verified</td>
+              {% else %}
+              <form method="post">
+                {% csrf_token %}
+
+                
+                <td>{{form.verify_image}}</td>
+                <input type="hidden" name="user_id" value="{{ doctor.id }}">
+                <td><input type="submit"> </td>
+              </form>
+
+              {% endif %}
+                
             </tr>
           {% endfor %}
           

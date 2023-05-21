@@ -1,0 +1,105 @@
+{% load static %}
+{% load bootstrap4 %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <title>Minia</title>
+</head>
+
+<body>
+    <div class="page">
+        <div class="sidebar">
+            <ul>
+                <li><a href="#" class="logo">
+                        <img src="{% static 'imgs/logo.png' %}" alt="Logo">
+                        <span class="logo-info">MPXV</span>
+                    </a></li>
+                <li><a href="{% url 'accounts:profile' request.user.slug %}">
+                        <i class="ri-settings-4-line"></i>
+                        <span class="sidebar-item">Account Setting
+                        </span>
+                    </a></li>
+                <li><a href="{% url 'accounts:feedback' request.user.slug %}">
+                        <i class="ri-settings-4-line"></i>
+                        <span class="sidebar-item">FeedBack
+                        </span>
+                    </a></li>
+                    <li><a href="{% url 'accounts:change_password' request.user.slug %}">
+                        <i class="ri-settings-4-line"></i>
+                        <span class="sidebar-item">Change Password
+                        </span>
+                    </a></li>
+                    
+                    {% if request.user.is_doctor %}
+                           
+                    <li><a href="{% url 'accounts:change_password' request.user.slug %}">
+                        <i class="ri-settings-4-line"></i>
+                        <span class="sidebar-item">Your Certificate 
+                        </span>
+                    </a></li>
+                    {% endif %}
+                     
+            </ul>
+        </div>
+        
+
+               
+        <div class="content">
+            <div class="head">
+                <div class="left-h">
+                </div>
+                <div class="mid-h">
+                    <ul>
+                        <li><a class="active" href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'diagonsis:upload_test' %}">Diagnoise</a></li>
+                        <li><a href="{% url 'accounts:profile' request.user.slug %}">Profile</a></li>
+                    </ul>
+                </div>
+                <div class="r-h">
+                    <span class="r-h-info">Hello, {{request.user.first_name}}</span>
+                    <div class="log-out">
+                        <a href="{% url 'logout' %}"><input type="submit" value="Logout" class="logout"/></a>
+                    </div>
+                </div>
+            </div>
+
+            {% block content %}
+
+            <div class="profile-img">
+                <img src="{% static 'imgs/p7.png' %}" alt="">
+            </div>
+                <div class="user-settings-grid">
+                    <div class="left-side">
+                        
+                    <img src="/media/{{request.user.image}}" alt="certificate">
+                    </div>
+                    
+                    {% if request.user.verify_image %}
+                    <p>You Are Verified  </p>
+                    {% else %}
+                    <p>You Are not Verified  </p>
+                    
+                    {% endif %}  
+                </div>
+        </div>
+
+        {% endblock content %}
+    </div>
+</body>
+
+</html>

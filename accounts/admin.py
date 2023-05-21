@@ -20,12 +20,12 @@ class CustomUserAdmin(UserAdmin):
         'is_user',
         'image',
         'address',
-        'slug',
+        'slug','verify_image'
     ]
     fieldsets = UserAdmin.fieldsets + ((None, {"fields":  ('age', 'is_doctor', 'is_admmin', 'is_user', 'image',
-                                        'address','slug',)}),)
+                                        'address','slug','verify_image',)}),)
     add_fieldsets = UserAdmin.add_fieldsets + ((None, {"fields":  ('age', 'is_doctor', 'is_admmin', 'is_user', 'image'
-                                        ,'address','slug',)}),)
+                                        ,'address','slug','verify_image',)}),)
 
 
 admin.site.register(CustomUser, CustomUserAdmin)

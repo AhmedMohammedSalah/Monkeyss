@@ -5,6 +5,10 @@ from django.contrib.auth.forms import AuthenticationForm
 
 
 
+class VerifyImageForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ['verify_image']
 class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm):
         model = CustomUser

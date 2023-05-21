@@ -1,13 +1,12 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
-
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import authenticate, login as auth_login
-from django.views.generic import CreateView,UpdateView,ListView
-from .forms import CustomUserCreationForm,EmailAuthenticationForm,AdminCreationForm
+from django.views.generic import CreateView,UpdateView,ListView,DetailView
+from .forms import CustomUserCreationForm,EmailAuthenticationForm,AdminCreationForm,VerifyImageForm
 from .models import CustomUser
 from django.contrib.auth.decorators import login_required, user_passes_test# Create your views here.
 from diagonsis.models import MedicalTest
@@ -24,11 +23,7 @@ class CustomUserSignUpView(CreateView):
         form.fields['last_name'].widget.attrs['class'] = "last"
         form.fields['last_name'].label = ""
         form.fields['last_name'].help_text = ""       
-           
-        form.fields['phone'].widget.attrs['class'] = ""
-        form.fields['phone'].label = ""
-        form.fields['phone'].help_text = "" 
-        
+      
         form.fields['email'].widget.attrs['class'] = "email"
         form.fields['email'].label = ""
         form.fields['email'].help_text = "" 
@@ -201,12 +196,23 @@ class DoctorsView(LoginRequiredMixin,UserPassesTestMixin, ListView):
     template_name = 'roles/dashboard-doctors.html'
     context_object_name = 'doctors'
 
+    form_class = VerifyImageForm
+
     def test_func(self):
         return self.request.user.is_authenticated and self.request.user.is_admmin
     
     def get_queryset(self):
         return CustomUser.objects.filter(is_doctor=True)
-    
+
+    def post(self, request, *args, **kwargs):
+        user_id = request.POST.get('user_id')
+        user = CustomUser.objects.get(id=user_id, is_doctor=True)
+        form = self.form_class(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            # return redirect('your_success_url')
+
+        return render(request, self.template_name, {'form': form, 'doctors': self.get_queryset()})
     
 class AddAdminCreateView(LoginRequiredMixin,UserPassesTestMixin,CreateView):    
     form_class = AdminCreationForm
@@ -253,3 +259,12 @@ class AddAdminCreateView(LoginRequiredMixin,UserPassesTestMixin,CreateView):
         user.is_admmin = True
         user.save()
         return super().form_valid(form)
+    
+class VerifyDetail(LoginRequiredMixin,UserPassesTestMixin,DetailView):
+    model = CustomUser
+    template_name='roles/verify_doctor.html'    
+    context_object_name = 'doctor'
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
+    def test_func(self):
+        return self.request.user.is_authenticated and self.request.user.is_doctor

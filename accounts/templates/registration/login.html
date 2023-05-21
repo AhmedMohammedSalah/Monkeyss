@@ -54,6 +54,7 @@
                     <label for="e-address">Email Address</label>
                     <div class="input-field">
                         {{form.username|as_crispy_field }}
+                        {% comment %} class {} {% endcomment %}
                         {% comment %} <input type="email" id="e-address" placeholder="Email Address" required> {% endcomment %}
                         <i class="ri-user-line email-icon"></i>
                     </div>
@@ -74,9 +75,9 @@
                 </form>
                     <p class="reg"><a href="{% url 'accounts:signup' %}"><span>Create Account</span></a></p>
                 </div>
-                <div class="r-log">
+                {% comment %} <div class="r-log">
                     <img src="{% static 'imgs/WhatsApp Image .png' %}" alt="LOGO">
-                </div>
+                </div> {% endcomment %}
             </div>
         </div>
     </div>

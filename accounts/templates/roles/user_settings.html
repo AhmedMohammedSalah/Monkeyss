@@ -44,6 +44,16 @@
                         <span class="sidebar-item">Change Password
                         </span>
                     </a></li>
+                    
+                    {% if request.user.is_doctor %}
+                           
+                    <li><a href="{% url 'accounts:verify' request.user.slug %}">
+                        <i class="ri-settings-4-line"></i>
+                        <span class="sidebar-item">Your Certificate 
+                        </span>
+                    </a></li>
+                    {% endif %}
+                     
             </ul>
         </div>
         

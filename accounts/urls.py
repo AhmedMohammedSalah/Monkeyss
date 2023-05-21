@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CustomUserSignUpView,EmailLoginView,home,CustomeUserUpdateView,RateUpdateView,ChangePasswordView,overview,AdminsView,UsersView,DoctorsView,AddAdminCreateView,AdminUpdateView
+from .views import CustomUserSignUpView,EmailLoginView,home,CustomeUserUpdateView,RateUpdateView,ChangePasswordView,overview,AdminsView,UsersView,DoctorsView,AddAdminCreateView,AdminUpdateView,VerifyDetail
 app_name='accounts'
 urlpatterns = [
     # account main 
@@ -10,6 +10,8 @@ urlpatterns = [
     path("profile/<str:slug>/",CustomeUserUpdateView.as_view(),name="profile"),
     path("profile/<str:slug>/feedback",RateUpdateView.as_view(),name="feedback"),
     path('profile/<str:slug>/change-password/', ChangePasswordView.as_view(), name='change_password'),
+    path('doctor-certifcate/<str:slug>/', VerifyDetail.as_view(), name='verify'),
+    
     # Admins 
     path('overview/',overview,name='overview' ),
     path('admins/', AdminsView.as_view(), name='admins'),

@@ -24,6 +24,7 @@ class CustomUser(AbstractUser):
     slug = models.SlugField(blank=True, null=True)
     address =models.CharField(max_length=50, blank=True, null=True)
     phone = models.CharField(max_length=11, null=True, blank=True)
+    verify_image=models.BooleanField(default=False)
     rate1=models.BooleanField(default=False)
     rate2=models.BooleanField(default=False)
     rate3=models.BooleanField(default=False)
