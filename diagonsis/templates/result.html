@@ -1,0 +1,76 @@
+{% load static %}
+
+{% load bootstrap4 %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <title>Minia</title>
+</head>
+
+<body>
+    <!-- Start Header -->
+    <div class="user-home">
+        <div id="nav-holder">
+            <div id="flex-nav">
+                <a href="#" class="logo">
+                    <img src="{% static 'imgs/logo.png' %}" alt="Logo">
+                </a>
+                <nav>
+                    <i class="ri-menu-3-line"></i>
+                    <ul>
+                        <li><a class="active" href="{% url 'accounts:login_home' %}">Home</a></li>
+                        <li><a href="{% url 'diagonsis:upload_test' %}">Diagnoise</a></li>
+                        <li><a href="{% url 'accounts:profile' request.user.slug%}">Profile</a></li>
+                    </ul>
+                    <h3>Hello, {{request.user.first_name}}</h3>
+                    <div class="log-out">
+                        <a type="submit" value="Logout" class="logout"href ="{% url 'logout' %}"></a>
+                        
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!-- End Header -->
+        <!-- Start diagnosis -->
+        <div class="diagnosis-user">
+            <div class="l-side">
+                <img src="{% static 'imgs/p0.png' %}" alt="">
+                <br>
+                <p>The Result : <span>  {{test.result}}</span></p>
+            </div>
+            {% if test.result == "The result is positive. You have monkeypox" %}
+            <div class="r-side">
+                <h1>You are injured :</h1>
+                    <p>1-Wash your hands frequently
+                    <br> 2-Avoid crowded places and close contact with anyone that has affected by disease
+                    <br> 3-Avoid touching roofs
+                </p>
+            </div>
+            {% else %}
+            <div class="r-side">
+                <h1>You are not injured :</h1>
+                <p>1-Wash your hands frequently
+                    <br> 2-Avoid crowded places and close contact with anyone that has affected by disease
+                    <br> 3-Avoid touching roofs
+                </p>
+            </div>
+            {% endif %}
+            
+
+        </div>
+        <!-- End diagnosis -->
+</body>
+
+</html>
