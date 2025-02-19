@@ -1,4 +1,3 @@
-
 {% load static %}
 
 {% load bootstrap4 %}
@@ -20,21 +19,35 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
         rel="stylesheet">
     <title>Minia</title>
+    <style>
+        .asd {
+            position: relative;
+            border-radius: 10px;
+            border: none;
+            outline: 0;
+            padding: 0 0 0 35px;
+            width: 100%;
+            height: 50px;
+            font-size: 17px;
+            margin-bottom: 40px;
+            background-color: #f3f4f8;
+        }
+
+    </style>
 </head>
 
 <body>
     <div class="login">
-        <nav>
-            <i class="ri-arrow-left-line"></i>
+        <nav style="width: fit-content; margin: 0 auto; ">
             <a href="#">
-                <img src="{% static 'imgs/logo.png' %}" alt="Logo">
+                <img src="{% static 'imgs/logo.png' %}" alt="Logo" >
             </a>
             <p>MPXV</p>
         </nav>
         <form method="post">
             {% csrf_token %}
         <div class="container">
-            <div class="log-text">
+            <div class="log-text" style="width: fit-content;margin: 0 auto; padding-left: 50px;">
                 <h1>Login</h1>
                 {% if form.errors %}
     <p>Your username and password didn't match. Please try again.</p>
@@ -49,9 +62,10 @@
     {% endif %}
   {% endif %}
             </div>
+    
             <div class="container-2">
-                <div class="l-log">
-                    <label for="e-address">Email Address</label>
+                <div class="l-log" style="min-width: 50%" >
+                    <label for="e-address" >Email Address</label>
                     <div class="input-field">
                         {{form.username|as_crispy_field }}
                         {% comment %} class {} {% endcomment %}
@@ -72,15 +86,15 @@
                     <div class="input-field">
                         <input type="submit" value="Login" class="input-login">
                     </div>
-                </form>
-                    <p class="reg"><a href="{% url 'accounts:signup' %}"><span>Create Account</span></a></p>
                 </div>
-                {% comment %} <div class="r-log">
-                    <img src="{% static 'imgs/WhatsApp Image .png' %}" alt="LOGO">
-                </div> {% endcomment %}
             </div>
-        </div>
+            <p class="reg" style="display: block;padding-bottom: 25px;text-align: center; margin: 0 auto;font-size: 13px;font-size: medium;"><a href="{% url 'accounts:signup' %}" >
+                Already registered?<span>Create An Account</span></a></p>
+
+        </form>
     </div>
+                
+        
 </body>
 
 </html>

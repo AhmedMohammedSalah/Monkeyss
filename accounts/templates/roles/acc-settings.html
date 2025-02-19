@@ -5,26 +5,23 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-        <form method="post">
+        <form method="post" >
             {% csrf_token %}
             <h1 id="acc-set">Account Settings</h1>
             <div class="acc-set-grid">
                 <div class="left-side">
-                    <label for="" class="first-l">First Name</label>
                     <div class="input-f">
                         <i class="ri-user-line"></i>
                         {{form.first_name|as_crispy_field }}
 
                         {% comment %} <input type="text" class="first" placeholder="First Name"> {% endcomment %}
                     </div>
-                    <label for="" class="email-l">Email Address</label>
                     <div class="input-f">
                         <i class="ri-mail-line"></i>
                         {{form.email|as_crispy_field }}
 
                         {% comment %} <input type="email" class="email" placeholder="Email Address"> {% endcomment %}
                     </div>
-                    <label for="" class="age-l">Age</label>
                     <div class="input-f">
                         <i class="ri-calendar-2-line"></i>
                         {{form.age|as_crispy_field }}
@@ -32,21 +29,18 @@
                     </div>
                 </div>
                 <div class="right-side">
-                    <label for="" class="last-l">Last Name</label>
                     <div class="input-f">
                         <i class="ri-user-line"></i>
                         
                         {{form.last_name|as_crispy_field }}
                         {% comment %} <input type="text" class="last" placeholder="Last Name"> {% endcomment %}
                     </div>
-                    <label for="" class="address-l">Address</label>
                     <div class="input-f">
                         <i class="ri-smartphone-line"></i>
                         {{form.address|as_crispy_field }}
 
                         {% comment %} <input type="text" class="address" placeholder="Address"> {% endcomment %}
                     </div>
-                    <label for="" class="phone-l">Phone Number</label>
                     <div class="input-f">
                         <i class="ri-phone-line"></i>
                         {{form.phone|as_crispy_field }}

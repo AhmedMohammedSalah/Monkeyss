@@ -2,7 +2,7 @@
 # coding: utf-8
 
 # In[1]:
-
+import os
 
 # All libraries
 from tensorflow import keras
@@ -22,8 +22,13 @@ def update_result (test:MedicalTest):
     img_array = image.img_to_array(img)
     img_batch = np.expand_dims(img_array, axis=0) 
     # قم بتحميل النموذج المحفوظ مسبقًا
-    generated_model = keras.models.load_model(r"/home/ahmed/Desktop/@work/Django Projects/monkey/monkey-dashboard/src/diagonsis/my_model")
     
+
+    model_path = r"/home/ahmed/@work25/Monkeyss/diagonsis/my_model"
+    if os.path.exists(model_path):
+        generated_model = keras.models.load_model(model_path)
+    else:
+        raise FileNotFoundError(f"Model file not found at {model_path}")    
     img_preprocessed = preprocess_input(img_batch)
     prediction = generated_model.predict(img_preprocessed)
     res =str(prediction)

@@ -28,6 +28,10 @@ class CustomUserSignUpView(CreateView):
         form.fields['email'].label = ""
         form.fields['email'].help_text = "" 
         
+        form.fields['username'].widget.attrs['class'] = "email"
+        form.fields['username'].label = ""
+        form.fields['username'].help_text = "" 
+        
         form.fields['address'].widget.attrs['class'] = "input"
         form.fields['address'].label = ""
         form.fields['address'].help_text = "" 
@@ -69,10 +73,10 @@ class EmailLoginView(LoginView):
     template_name = 'registration/login.html'
     def get_form(self, form_class=None):
         form = super().get_form(form_class) 
-        form.fields['username'].widget.attrs['class'] = "input"
+        form.fields['username'].widget.attrs['class'] = "asd"
         form.fields['username'].label = ""
         form.fields['username'].help_text = "" 
-        form.fields['password'].widget.attrs['class'] = "input"
+        form.fields['password'].widget.attrs['class'] = "asd"
         form.fields['password'].label = ""
         form.fields['password'].help_text = ""
         return form

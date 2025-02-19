@@ -16,7 +16,7 @@ class TestCreateView(UserPassesTestMixin, LoginRequiredMixin, CreateView):
         return reverse('diagonsis:test_detail', kwargs={'pk': self.object.pk})
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
-        form.fields['image'].widget.attrs['class'] = "form-control"
+        form.fields['image'].widget.attrs['class'] = "form-control gh"
         form.fields['image'].widget.attrs['placeholder'] = "صورة الجلد "
         form.fields['image'].label = ""
         return form

@@ -17,6 +17,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
         rel="stylesheet">
     <title>Minia</title>
+    <style>
+        .diagnosis-user .l-side::after {
+            display: none;
+        }
+        #d ,#id_image{
+            margin-top: 10px;
+        }
+        
+    </style>
 </head>
 
 <body>
@@ -52,7 +61,7 @@
                     {{form.image|as_crispy_field }}
                     
                     {% comment %} <input type="submit" value="Upload Photo" id="u"> {% endcomment %}
-                    <input type="submit" id="d">
+                    <input type="submit" id="d" value="Diagnoise">
                 </form>
                 </div>
             

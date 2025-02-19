@@ -16,51 +16,59 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
         rel="stylesheet">
     <title>Minia</title>
+    <style>
+        .form-check-label{
+            color: black
+        }
+       
+    </style>
 </head>
 
 <body>
     <div class="sign-up">
-        <nav>
-            <i class="ri-arrow-left-line"></i>
+        <nav style="width: fit-content; margin: 0 auto;">
             <a href="#">
                 <img src="{% static 'imgs/logo.png' %}" alt="Logo">
             </a>
             <p>MPXV</p>
         </nav>
-        <div class="log-text">
+        <div class="log-text" style="width: fit-content; margin: 0 auto;">
             <h1>Create Account</h1>
         </div>
         <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="container">
+          
             <div class="col-1 cols">
                 <label for="f-name">First Name</label>
                 <div class="input-field">
                     {{form.first_name|as_crispy_field }}
 
-                    {% comment %} <input type="text" id="f-name" placeholder="First Name" required> {% endcomment %}
                     <i class="ri-user-line email-icon"></i>
+                </div>
+                <div  style="min-height: fit-content;">
+                <label for="address">User Name</label>
+
+                    <div class="input-field">
+                        {{form.username|as_crispy_field }}
+                    </div>
                 </div>
                 <label for="e-address">Email Address</label>
                 <div class="input-field">
                     {{form.email|as_crispy_field }}
                     
-                    {% comment %} <input type="email" id="e-address" placeholder="Email Address" required> {% endcomment %}
                     <i class="ri-shield-user-line"></i>
                 </div>
                 <label for="password">Password</label>
                 <div class="input-field">
                     {{form.password1|as_crispy_field }}
                     
-                    {% comment %} <input type="password" id="password" placeholder="Password" required> {% endcomment %}
                     <i class="ri-lock-2-line pass-icon"></i>
                 </div>
                 <i class="ri-eye-off-fill hide-icon"></i>
-                <label for="upload" class="up-label">If you doctor, upload certificate</label>
-                <div class="input-field upload">
+                <div class="input-field upload" style="padding-top: 65px;">
                     {{form.image|as_crispy_field }}
                     
-                    {% comment %} <input type="text" id="upload" placeholder="upload File..." required> {% endcomment %}
                     <i class="ri-links-line up-link"></i>
                 </div>
 
@@ -70,21 +78,18 @@
                 <div class="input-field">
                     {{form.last_name|as_crispy_field }}
                     
-                    {% comment %} <input type="text" id="l-name" placeholder="First Name" required> {% endcomment %}
                     <i class="ri-user-line email-icon"></i>
                 </div>
                 <label for="address">Address</label>
                 <div class="input-field">
                     {{form.address|as_crispy_field }}
                     
-                    {% comment %} <input type="txt" id="address" placeholder="Your Address" required> {% endcomment %}
                     <i class="ri-home-4-line"></i>
                 </div>
                 <label for="password">Confirm Password</label>
                 <div class="input-field">
                     {{form.password2|as_crispy_field }}
                     
-                    {% comment %} <input type="password" id="password" placeholder="Confirm Password" required> {% endcomment %}
                     <i class="ri-lock-2-line pass-icon"></i>
                 </div>
                 <i class="ri-eye-off-fill hide-icon"></i>
@@ -93,35 +98,28 @@
                 <div class="input-field">
                     {{form.age|as_crispy_field }}
 
-                    {% comment %} <input type="text" id="age" placeholder="Age" required> {% endcomment %}
                     <i class="ri-user-line email-icon"></i>
                 </div>
 
             </div>
-            <div class="col-3 cols">
-                <img src="{% static 'imgs/WhatsApp Image .png' %}" alt="LOGO">
-            </div>
-            <div class="radios">
+          
+            <div class="radios" style="display: flex; align-items: center;">
                 <p>Are You:</p>
                 <div>
                     {{form.is_admmin|as_crispy_field }}
 
-                    {% comment %} <input type="radio" id="admin" name="fav" value="Admin">
-                    <label for="admin">Admin</label> {% endcomment %}
+                    
                 </div>
                 <div>
 
                     {{form.is_doctor|as_crispy_field }}
 
-                    {% comment %} <input type="radio" id="doctor" name="fav" value="Doctor">
-                    <label for="Doctor">Doctor</label> {% endcomment %}
+                  
                 </div>
                 <div>
 
                     {{form.is_user|as_crispy_field }}
 
-                    {% comment %} <input type="radio" id="User" name="fav" value="User"> {% endcomment %}
-                    <label for="user">User</label> 
 
                 </div>
             </div>
@@ -130,7 +128,7 @@
             <input type="submit" value="Register" class="register">
         </div>
       </form>
-        <div class="last-p">Already registered? <span>Log In.</span></div>
+        <div class="last-p">Already registered? <a href ="{% url 'accounts:login' %}">Log In.</a></div>
     </div>
 </body>
 

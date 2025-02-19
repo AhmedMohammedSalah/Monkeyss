@@ -17,6 +17,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
         rel="stylesheet">
     <title>Minia</title>
+    <style>
+        .diagnosis-user .l-side::after {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -53,9 +58,14 @@
             {% if test.result == "The result is positive. You have monkeypox" %}
             <div class="r-side">
                 <h1>You are injured :</h1>
-                    <p>1-Wash your hands frequently
-                    <br> 2-Avoid crowded places and close contact with anyone that has affected by disease
-                    <br> 3-Avoid touching roofs
+                    <p>1- Anyone with symptoms of monkeypox should contact a health care provider as soon as possible.
+
+                    <br> 2- Avoid close contact with others. Wear a mask.
+
+                    <br>3-  cover any sores and let the provider know before you arrive for care. 
+                    <br>4-Some providers offer testing for people who have symptoms of monkeypox.
+                    <br>4-Some providers offer testing for people who have symptoms of monkeypox.
+
                 </p>
             </div>
             {% else %}
